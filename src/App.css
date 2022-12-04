@@ -1,38 +1,221 @@
-.App {
-  text-align: center;
+.calculator-grid {
+  display: grid;
+
+  justify-content: center;
+  align-content: center;
+
+  grid-template-columns: repeat(4, 57.5px);
+  grid-template-rows: 120px repeat(5, 48px);
+
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@media screen and (max-width: 500px) {
+  .calculator-grid{
+    /* min-height: 50%; */
+    width: 100%;
+    height: 100vh;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 2fr repeat(5, 1fr);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.calculator-grid > button {
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #f0f0f0;
+  border: 0.5px solid rgb(30, 33, 39);
+  /* outline: none; */
+
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+button[data-all-clear],
+button[data-sign-change],
+button[data-parentheses] {
+  background-color: hsl(225, 3%, 29%);
+  font-size: 1rem;
+}
+
+button[data-number] {
+  font-size: 1.3125rem;
+  background-color: hsl(240, 2%, 40%);
+}
+
+button[data-operation],
+button[data-equals] {
+  font-size: 1.3125rem;
+  font-weight: 700;
+  background-color: hsl(32, 97%, 55%);
+}
+
+button[data-equals] {
+  border-radius: 0 0 5px 0;
+}
+
+.span-two {
+  border-radius: 0 0 0 5px;
+}
+
+button[data-all-clear]:hover,
+button[data-sign-change]:hover,
+button[data-parentheses]:hover {
+  background-color: hsl(225, 3%, 39%);
+}
+
+button[data-number]:hover {
+  background-color: hsl(240, 2%, 50%);
+}
+
+button[data-operation]:hover,
+button[data-equals]:hover {
+  background-color: hsl(32, 97%, 65%);
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+.output {
+  position: relative;
+  grid-column: 1/ -1;
+  background-color: rgba(45, 45, 48, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 10px 10px 0 10px;
+  /* word-wrap: break-word;
+  word-break: break-all; */
+
+  border-radius: 5px 5px 0 0;
+}
+
+.output .previous-operand {
+  color: rgba(255, 255, 255, 0.749);
+  font-size: 1rem;
+}
+
+.output .current-operand {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* window BEGIN */
+
+a {
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.close span {
+  line-height: 9.5px;
+  padding-left: 1.5px;
+}
+
+.zoom span {
+  line-height: 9.5px;
+  padding-left: 1.1px;
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0.3em;
+  left: 0.5em;
+  gap: 0.5em;
+}
+
+.titlebar span {
+  line-height: 9px;
+  vertical-align: 60%;
+}
+
+.titlebar:hover a {
+  visibility: visible;
+}
+
+.close {
+  background: #ff5c5c;
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #e33e41;
+  border-radius: 50%;
+}
+
+.close:active {
+  background: #c14645;
+  border: 1px solid #b03537;
+}
+
+.close:active .closebutton {
+  color: #4e0002;
+}
+
+.closebutton {
+  color: #820005;
+  visibility: hidden;
+  cursor: default;
+}
+
+.minimize {
+  background: #ffbd4c;
+  font-size: 12px;
+  /* line-height: 11px; */
+  width: 12px;
+  height: 12px;
+  border: 1px solid #e09e3e;
+  border-radius: 50%;
+}
+
+.minimize:active {
+  background: #c08e38;
+  border: 1px solid #af7c33;
+}
+
+.minimize:active .minimizebutton {
+  color: #5a2607;
+}
+
+.minimizebutton {
+  color: #9a5518;
+  visibility: hidden;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zoom {
+  background: #00ca56;
+  font-size: 12px;
+  /* line-height: 11px; */
+
+  width: 12px;
+  height: 12px;
+  border: 1px solid #14ae46;
+  border-radius: 50%;
+}
+
+.zoom:active {
+  background: #029740;
+  border: 1px solid #128435;
+}
+
+.zoom:active .zoombutton {
+  color: #003107;
+}
+
+.zoombutton {
+  color: #006519;
+  visibility: hidden;
+  cursor: default;
+}
+
+.content {
+  padding: 10px;
 }
